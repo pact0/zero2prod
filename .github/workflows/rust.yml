@@ -30,6 +30,7 @@ jobs:
   lint:
     name: 🚨 Lint
     runs-on: ubuntu-latest
+    permissions: write-all
     services:
       postgres:
         image: postgres:12
@@ -43,11 +44,11 @@ jobs:
       SQLX_VERSION: 0.6.2
       SQLX_FEATURES: "rustls,postgres"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v1
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable
+          toolchain: nightly
           override: true
           components: clippy
       - name: Cache sqlx-cli
